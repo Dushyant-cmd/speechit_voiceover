@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SpeechIt AI Voiceover</string>
     <string name="hi_there_spend_a_moment_with_our_app_and_we_ll_tailor_the_experience_just_for_you">Hi there! Spend a moment with our app, and we’ll tailor the experience just for you.</string>
+    <string name="how_you_will_use_speechit">How you will be using SPEECHIT</string>
 
     <array name="com_google_android_gms_fonts_certs">
         <item>@array/com_google_android_gms_fonts_certs_dev</item>
