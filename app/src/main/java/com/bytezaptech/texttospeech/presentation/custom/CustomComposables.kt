@@ -1,4 +1,4 @@
-package com.bytezaptech.texttospeech.presentation
+package com.bytezaptech.texttospeech.presentation.custom
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
@@ -27,7 +26,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bytezaptech.texttospeech.R
 import com.bytezaptech.texttospeech.presentation.theme.fontFamily
 
 @Composable
@@ -82,19 +80,19 @@ fun HighlightTextCharacters(text: String, highlightRange: IntRange?) {
                 style = SpanStyle(
                     background = MaterialTheme.colorScheme.primaryContainer,
                     color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Bold,
                     textDecoration = TextDecoration.Underline
                 ),
                 start = it.first,
-                end = it.last + 1
+                end = it.last + 1,
             )
         }
     }
 
     Text(
         text = spannableString,
-        fontSize = 24.sp,
-        fontFamily = fontFamily
+        fontSize = 20.sp,
+        fontFamily = fontFamily,
+        fontWeight = FontWeight.Medium
     )
 }
 

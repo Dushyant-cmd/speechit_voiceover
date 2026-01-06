@@ -17,12 +17,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.bytezaptech.texttospeech.R
-import com.bytezaptech.texttospeech.presentation.HighlightTextCharacters
-import com.bytezaptech.texttospeech.presentation.RippleEffectImage
-import com.bytezaptech.texttospeech.speakRobotically
+import com.bytezaptech.texttospeech.presentation.custom.HighlightTextCharacters
+import com.bytezaptech.texttospeech.presentation.custom.RippleEffectImage
+import com.bytezaptech.texttospeech.utils.speakRobotically
 
 @Composable
-fun UsecaseScreen(modifier: Modifier = Modifier, fromUsecaseToUsage: () -> Unit) {
+fun UsecaseScreen(modifier: Modifier = Modifier, fromUsecaseToUsage: (useCase: String) -> Unit) {
     Column(
         modifier = modifier
             .padding(horizontal = 16.dp, vertical = 4.dp)
@@ -41,10 +41,10 @@ fun UsecaseScreen(modifier: Modifier = Modifier, fromUsecaseToUsage: () -> Unit)
         HighlightTextCharacters(text = speakText, highlightRange)
 
         DisposableEffect(key1 = true) {
-            val tts = speakRobotically(context, speakText, {
+            val tts = speakRobotically(context, speakText, 1f, {
                 highlightRange = it
             }) {
-                fromUsecaseToUsage()
+                fromUsecaseToUsage("Daily")
             }
             onDispose {
                 tts.stop()

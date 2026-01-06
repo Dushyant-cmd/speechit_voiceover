@@ -17,6 +17,7 @@ sealed class NavScreen(val route: String) {
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
     val navController: NavHostController = rememberNavController()
+    val introductionViewModel
 
     NavHost(navController = navController, startDestination = NavScreen.Introduction.route) {
         composable(route = NavScreen.Introduction.route) { backStackEntry ->
@@ -26,7 +27,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
         }
 
         composable(route = NavScreen.Usecase.route) {
-            UsecaseScreen(modifier = modifier) {
+            UsecaseScreen(modifier = modifier) { useCase ->
             }
         }
     }

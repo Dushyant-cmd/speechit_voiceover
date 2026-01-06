@@ -1,4 +1,4 @@
-package com.bytezaptech.texttospeech
+package com.bytezaptech.texttospeech.utils
 
 import android.content.Context
 import android.os.Bundle
@@ -9,11 +9,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 
 fun speakRobotically(
     context: Context,
     textToSpeech: String,
+    playbackSpeed: Float = 1f,
     highlightRange: (IntRange?) -> Unit,
     fromIntroToUsecase: () -> Unit
 ): TextToSpeech {
@@ -21,11 +23,14 @@ fun speakRobotically(
 
     tts = TextToSpeech(context) {
         if (it == TextToSpeech.SUCCESS) {
-            tts?.language = java.util.Locale.UK
-            val params = Bundle().apply {
-                putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "tts_utterance_id")
+            tts?.let { tts ->
+                tts.language = Locale.UK
+                val params = Bundle().apply {
+                    putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "tts_utterance_id")
+                }
+                tts.speak(textToSpeech, TextToSpeech.QUEUE_FLUSH, params, "tts_utterance_id")
+                tts.setSpeechRate(playbackSpeed)
             }
-            tts?.speak(textToSpeech, TextToSpeech.QUEUE_FLUSH, params, "tts_utterance_id")
         }
     }
 

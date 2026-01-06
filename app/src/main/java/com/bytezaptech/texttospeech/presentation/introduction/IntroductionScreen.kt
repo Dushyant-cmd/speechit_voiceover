@@ -1,14 +1,10 @@
 package com.bytezaptech.texttospeech.presentation.introduction
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -17,21 +13,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.bytezaptech.texttospeech.R
-import com.bytezaptech.texttospeech.presentation.HighlightTextCharacters
-import com.bytezaptech.texttospeech.presentation.RippleEffectImage
-import com.bytezaptech.texttospeech.presentation.rippleLoadingAnimationModifier
-import com.bytezaptech.texttospeech.speakRobotically
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.bytezaptech.texttospeech.presentation.custom.HighlightTextCharacters
+import com.bytezaptech.texttospeech.presentation.custom.RippleEffectImage
+import com.bytezaptech.texttospeech.utils.speakRobotically
 
 @Composable
 fun IntroductionScreen(modifier: Modifier = Modifier, fromIntroToUsecase: () -> Unit) {
@@ -43,8 +31,7 @@ fun IntroductionScreen(modifier: Modifier = Modifier, fromIntroToUsecase: () -> 
     ) {
         val context = LocalContext.current
         var highlightRange by remember { mutableStateOf<IntRange?>(null) }
-        val speakText =
-            stringResource(R.string.hi_there_spend_a_moment_with_our_app_and_we_ll_tailor_the_experience_just_for_you)
+        val speakText = stringResource(R.string.hi_there_spend_a_moment_with_our_app_and_we_ll_tailor_the_experience_just_for_you)
 
         RippleEffectImage(R.drawable.baseline_mic_24)
 
@@ -53,7 +40,7 @@ fun IntroductionScreen(modifier: Modifier = Modifier, fromIntroToUsecase: () -> 
         HighlightTextCharacters(text = speakText, highlightRange)
 
         DisposableEffect(key1 = true) {
-            val tts = speakRobotically(context, speakText, {
+            val tts = speakRobotically(context, speakText, 1f, {
                 highlightRange = it
             }) {
                 fromIntroToUsecase()
